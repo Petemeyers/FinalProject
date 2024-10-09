@@ -1,3 +1,5 @@
+This project is a fan creation and is not affiliated with or endorsed by Palladium Books.
+
 RPG Character Creation Game This project is an RPG character creation game inspired by the Teenage Mutant Ninja Turtles & Other Strangeness RPG system by Palladium Books (1994 rules). The game allows users to generate a character from various species, roll attributes, assign bonus rolls for highlighted attributes, and determine the character's age based on a 100-sided die roll.
 
 Features
@@ -38,7 +40,7 @@ Palladium Books system rules as a reference for species and dice rolls
 
 Acknowledgments
 
-The game mechanics, species attributes, and dice rolling system are based on the Teenage Mutant Ninja Turtles & Other Strangeness RPG and other role-playing systems published by Palladium Books. This project is a fan creation and is not affiliated with or endorsed by Palladium Books.
+The game mechanics, species attributes, and dice rolling system are based on the Teenage Mutant Ninja Turtles & Other Strangeness RPG and other role-playing systems published by Palladium Books. 
 
 The code and some descriptive texts were generated with the help of ChatGPT, an AI language model developed by OpenAI. ChatGPT assisted in providing code examples, structuring the project, and refining gameplay logic.
 
