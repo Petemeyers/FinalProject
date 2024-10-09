@@ -1,4 +1,8 @@
-import React, { useState } from 'react';
+// CharacterForm Component
+import React from 'react';
+
+import { useState } from 'react';
+import PropTypes from 'prop-types';
 import AttributeRoller from './AttributeRoller';
 import CharacterDisplay from './CharacterDisplay';
 
@@ -12,14 +16,13 @@ const CharacterForm = ({ onCharacterCreate }) => {
   };
 
   const handleAttributeRoll = () => {
-    // Call AttributeRoller function with species
     const rolledAttributes = AttributeRoller(species);
     setAttributes(rolledAttributes);
   };
 
   const handleSubmit = () => {
     const newCharacter = { name, species, attributes };
-    onCharacterCreate(newCharacter); // pass character to parent component or database
+    onCharacterCreate(newCharacter);
   };
 
   return (
@@ -46,6 +49,10 @@ const CharacterForm = ({ onCharacterCreate }) => {
       <button onClick={handleSubmit}>Finish Character</button>
     </div>
   );
+};
+
+CharacterForm.propTypes = {
+  onCharacterCreate: PropTypes.func.isRequired,
 };
 
 export default CharacterForm;

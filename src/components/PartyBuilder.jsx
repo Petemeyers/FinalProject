@@ -1,23 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 
-const PartyBuilder = () => {
-  const [characters, setCharacters] = useState([]);
-
-  useEffect(() => {
-    // Fetch characters from database
-    fetch('/api/characters')
-      .then((res) => res.json())
-      .then((data) => setCharacters(data));
-  }, []);
-
+const PartyBuilder = ({ characters }) => {
   return (
     <div>
       <h2>Party Builder</h2>
       <ul>
         {characters.map((char) => (
-          <li key={char.id}>
+          <li key={char.name}>
             {char.name} - {char.species}
-            {/* Add details */}
           </li>
         ))}
       </ul>
@@ -25,4 +16,14 @@ const PartyBuilder = () => {
   );
 };
 
+PartyBuilder.propTypes = {
+  characters: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      species: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+};
+
 export default PartyBuilder;
+

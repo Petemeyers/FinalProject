@@ -1,14 +1,15 @@
+// useChatAPI.jsx
 import axios from 'axios';
 
-const useChatAPI = () => {
+export const useChatAPI = () => {
   const sendMessage = async (token, message) => {
     try {
       const response = await axios.post(
-        'http://localhost:5000/chat', // ChatGPT endpoint or your proxy
-        { message },                  // Pass the message to ChatGPT
+        'http://localhost:5000/chat',
+        { message },
         {
           headers: {
-            Authorization: `Bearer ${token}`,  // Attach JWT token in the headers
+            Authorization: `Bearer ${token}`,
           },
         }
       );
@@ -20,5 +21,3 @@ const useChatAPI = () => {
 
   return { sendMessage };
 };
-
-export default useChatAPI;
