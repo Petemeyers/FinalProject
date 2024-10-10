@@ -22,7 +22,7 @@ export const useChatAPI = () => {
       setMessages((prevMessages) => [
         ...prevMessages,
         { sender: 'user', text: message },
-        { sender: 'bot', text: response.data.message },
+        { sender: 'GM', text: response.data.message },
       ]);
 
       return response.data;

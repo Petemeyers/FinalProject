@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import '../app.css';
-import { speciesData, ageTable } from './data';
+import { speciesData, ageTable, socialBackgrounds } from './data';
 import { rollDice, calculateAttributeRolls, determineCharacterAge } from './util';
 import { useNavigate } from 'react-router-dom';
-
 
 const CharacterCreator = ({ onCharacterCreate = () => {} }) => {
   const navigate = useNavigate();
@@ -15,6 +14,7 @@ const CharacterCreator = ({ onCharacterCreate = () => {} }) => {
   const [alignment, setAlignment] = useState('Good: Principled');
   const [characterName, setCharacterName] = useState('');
   const [origin, setOrigin] = useState('');
+  const [socialBackground, setSocialBackground] = useState('');
   const [bonusRolled, setBonusRolled] = useState(false);
 
   const regenerateAttributes = () => {
@@ -75,6 +75,12 @@ const CharacterCreator = ({ onCharacterCreate = () => {} }) => {
     setOrigin(`Age: ${characterAge}`);
   };
 
+  const rollSocialBackground = () => {
+    const roll = rollDice(100, 1);
+    const background = socialBackgrounds.find(bg => roll >= bg.range[0] && roll <= bg.range[1]).background;
+    setSocialBackground(background);
+  };
+
   const handleCreateCharacter = () => {
     if (characterName && species) {
       const newCharacter = {
@@ -85,8 +91,10 @@ const CharacterCreator = ({ onCharacterCreate = () => {} }) => {
         hp,
         alignment,
         origin,
+        socialBackground,
       };
       onCharacterCreate(newCharacter);
+      navigate('/party-builder'); // Navigate to PartyBuilder after creating a character
       // Reset fields after creation
       setSpecies('HUMAN');
       setAttributes({});
@@ -95,6 +103,7 @@ const CharacterCreator = ({ onCharacterCreate = () => {} }) => {
       setAlignment('Good: Principled');
       setCharacterName('');
       setOrigin('');
+      setSocialBackground('');
       setBonusRolled(false);
     }
   };
@@ -158,6 +167,7 @@ const CharacterCreator = ({ onCharacterCreate = () => {} }) => {
 
       <button onClick={rollBonus}>Roll Bonus for Attributes</button>
       <button onClick={rollAge}>Roll Age</button>
+      <button onClick={rollSocialBackground}>Roll Social Background</button>
 
       <div id="name-section">
         <label htmlFor="character-name">Enter Character Name:</label>
@@ -195,6 +205,7 @@ const CharacterCreator = ({ onCharacterCreate = () => {} }) => {
         <div>HP: {hp}</div>
         <div>Alignment: {alignment}</div>
         <div>Origin: {origin}</div>
+        <div>Social Background: {socialBackground}</div>
       </div>
       <button onClick={() => navigate(-1)} className="back-button">
         Back

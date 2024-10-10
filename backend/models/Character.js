@@ -1,24 +1,34 @@
-import mongoose from 'mongoose';
+// models/Character.js
+import mongoose from "mongoose";
 
 const characterSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  age: { type: Number, required: true },
-  species: { type: String, required: true },
-  social: { type: String, required: true },
-  level: { type: Number, required: true },
+  name: {
+    type: String,
+    required: true,
+  },
+  species: {
+    type: String,
+    required: true,
+  },
   attributes: {
-    IQ: Number,
-    ME: Number,
-    MA: Number,
-    PS: Number,
-    PP: Number,
-    PE: Number,
-    PB: Number,
-    SPD: Number,
-    HP: Number,
+    type: Map,
+    of: Number,
+  },
+  level: {
+    type: Number,
+    required: true,
+  },
+  hp: {
+    type: Number,
+  },
+  alignment: {
+    type: String,
+    required: true,
+  },
+  origin: {
+    type: String,
   },
 });
 
-const Character = mongoose.model('Character', characterSchema);
-
+const Character = mongoose.model("Character", characterSchema);
 export default Character;

@@ -14,7 +14,7 @@ const App = () => {
   useEffect(() => {
     const fetchCharacters = async () => {
       try {
-        const response = await axios.get("https://localhost:5000/api/characters");
+        const response = await axios.get("http://localhost:5000/api/characters");
         setCharacters(response.data);
       } catch (error) {
         console.error("Error fetching characters:", error);
@@ -24,23 +24,23 @@ const App = () => {
     fetchCharacters();
   }, []);
 
-   // Function to handle adding a new character to the database
-   const addCharacter = async (newCharacter) => {
+  // Function to handle adding a new character to the database
+  const addCharacter = async (newCharacter) => {
     try {
-      const response = await axios.post("https://localhost:5000/api/characters", newCharacter);
+      const response = await axios.post("http://localhost:5000/api/characters", newCharacter);
       setCharacters([...characters, response.data]);
     } catch (error) {
       console.error("Error adding character:", error);
     }
   };
-  
+
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/chat" element={<Chat />} />
-      <Route path="/character-creation" element={<CharacterCreator />} />
-      <Route path="/party-builder" element={<PartyBuilder characters={characters} />} /> {/* Pass characters */}
-      <Route path="/character-list" element={<CharacterList characters={characters} />} /> {/* Pass characters */}
+      <Route path="/character-creation" element={<CharacterCreator onCharacterCreate={addCharacter} />} />
+      <Route path="/party-builder" element={<PartyBuilder characters={characters} />} />
+      <Route path="/character-list" element={<CharacterList characters={characters} />} />
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );

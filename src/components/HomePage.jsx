@@ -41,7 +41,7 @@ const HomePage = () => {
       <h1>Welcome to My App</h1>
       <p>This is the home page of the application.</p>
       <p>
-        Click on <Link to="/CharacterCreator">"Create Character"</Link> to access the full features of the app.
+      Click on <Link to="/character-creation">"Create Character"</Link> to access the full features of the app.
       </p>
     </div>
   );
