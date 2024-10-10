@@ -21,9 +21,7 @@ const HomePage = () => {
           <li>
             <Link to="/">Home</Link>
           </li>
-          <li>
-            <Link to="/loginform">Login to Play</Link>
-          </li>
+          
           <li>
             <Link to="/chat">Begin Adventure</Link>
           </li>
@@ -43,7 +41,7 @@ const HomePage = () => {
       <h1>Welcome to My App</h1>
       <p>This is the home page of the application.</p>
       <p>
-        Click on <Link to="/loginform">"Login to Play"</Link> to access the full features of the app.
+        Click on <Link to="/CharacterCreator">"Create Character"</Link> to access the full features of the app.
       </p>
     </div>
   );

@@ -4,7 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"vite\" \"nodemon server.jsx\"",
+    "start": "node server.js",
+    "dev": "concurrently \"vite\" \"nodemon backend/server.js\"",
     "build": "vite build",
     "serve": "vite preview",
     "lint": "eslint .",
@@ -18,8 +19,11 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "dotenv-safe": "^9.1.0",
-    "express": "^4.21.0",
+    "express": "^4.21.1",
     "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.9.0",
+    "mongoose": "^8.7.0",
+    "nodemon": "^3.1.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.26.2"

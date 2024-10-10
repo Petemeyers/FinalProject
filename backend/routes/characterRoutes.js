@@ -1,5 +1,5 @@
 import express from "express";
-import Character from "../models/Character";
+import Character from "../models/Character.js";
 
 const router = express.Router();
 
@@ -13,6 +13,22 @@ router.get("/", async (req, res) => {
     res
       .status(500)
       .json({ message: "Server Error: Unable to retrieve characters." });
+  }
+});
+
+// GET character by ID
+router.get("/:id", async (req, res) => {
+  try {
+    const character = await Character.findById(req.params.id);
+    if (!character) {
+      return res.status(404).json({ message: "Character not found." });
+    }
+    res.status(200).json(character);
+  } catch (error) {
+    console.error("Error fetching character:", error);
+    res
+      .status(500)
+      .json({ message: "Server Error: Unable to retrieve character." });
   }
 });
 
@@ -40,6 +56,48 @@ router.post("/", async (req, res) => {
   } catch (error) {
     console.error("Error adding character:", error);
     res.status(500).json({ message: "Server Error: Unable to add character." });
+  }
+});
+
+// PUT update character by ID
+router.put("/:id", async (req, res) => {
+  const { name, age, species, social, level, attributes } = req.body;
+
+  try {
+    const updatedCharacter = await Character.findByIdAndUpdate(
+      req.params.id,
+      { name, age, species, social, level, attributes },
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedCharacter) {
+      return res.status(404).json({ message: "Character not found." });
+    }
+
+    res.status(200).json(updatedCharacter);
+  } catch (error) {
+    console.error("Error updating character:", error);
+    res
+      .status(500)
+      .json({ message: "Server Error: Unable to update character." });
+  }
+});
+
+// DELETE character by ID
+router.delete("/:id", async (req, res) => {
+  try {
+    const deletedCharacter = await Character.findByIdAndDelete(req.params.id);
+
+    if (!deletedCharacter) {
+      return res.status(404).json({ message: "Character not found." });
+    }
+
+    res.status(200).json({ message: "Character deleted successfully." });
+  } catch (error) {
+    console.error("Error deleting character:", error);
+    res
+      .status(500)
+      .json({ message: "Server Error: Unable to delete character." });
   }
 });
 

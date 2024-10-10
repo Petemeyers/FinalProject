@@ -7,7 +7,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
 }
 
 .container {
@@ -61,4 +60,11 @@ input[type="text"] {
   width: calc(100% - 22px);
   border: 1px solid #ccc;
   border-radius: 5px;
+}
+.character-creator-container {
+  overflow: hidden; /* Prevent scrolling */
+  height: 100vh; /* Make sure it fits the viewport height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
