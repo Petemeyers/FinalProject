@@ -14,7 +14,7 @@ const App = () => {
   useEffect(() => {
     const fetchCharacters = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/characters");
+        const response = await axios.get("https://localhost:5000/api/characters");
         setCharacters(response.data);
       } catch (error) {
         console.error("Error fetching characters:", error);
@@ -27,7 +27,7 @@ const App = () => {
    // Function to handle adding a new character to the database
    const addCharacter = async (newCharacter) => {
     try {
-      const response = await axios.post("http://localhost:5000/api/characters", newCharacter);
+      const response = await axios.post("https://localhost:5000/api/characters", newCharacter);
       setCharacters([...characters, response.data]);
     } catch (error) {
       console.error("Error adding character:", error);

@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import '../app.css';
 import { speciesData, ageTable } from './data';
 import { rollDice, calculateAttributeRolls, determineCharacterAge } from './util';
+import { useNavigate } from 'react-router-dom';
 
-const CharacterCreator = () => {
+
+const CharacterCreator = ({ onCharacterCreate = () => {} }) => {
+  const navigate = useNavigate();
   const [species, setSpecies] = useState('HUMAN');
   const [attributes, setAttributes] = useState({});
   const [level, setLevel] = useState(1);
@@ -69,6 +73,30 @@ const CharacterCreator = () => {
     const ageRoll = rollDice(100, 1);
     const characterAge = determineCharacterAge(species, ageRoll);
     setOrigin(`Age: ${characterAge}`);
+  };
+
+  const handleCreateCharacter = () => {
+    if (characterName && species) {
+      const newCharacter = {
+        name: characterName,
+        species,
+        attributes,
+        level,
+        hp,
+        alignment,
+        origin,
+      };
+      onCharacterCreate(newCharacter);
+      // Reset fields after creation
+      setSpecies('HUMAN');
+      setAttributes({});
+      setLevel(1);
+      setHp(null);
+      setAlignment('Good: Principled');
+      setCharacterName('');
+      setOrigin('');
+      setBonusRolled(false);
+    }
   };
 
   return (
@@ -141,6 +169,8 @@ const CharacterCreator = () => {
         />
       </div>
 
+      <button onClick={handleCreateCharacter}>Create Character</button>
+
       <div id="final-character">
         <h2>Final Character</h2>
         <p>Name: {characterName}</p>
@@ -166,8 +196,15 @@ const CharacterCreator = () => {
         <div>Alignment: {alignment}</div>
         <div>Origin: {origin}</div>
       </div>
+      <button onClick={() => navigate(-1)} className="back-button">
+        Back
+      </button>
     </div>
   );
+};
+
+CharacterCreator.propTypes = {
+  onCharacterCreate: PropTypes.func,
 };
 
 export default CharacterCreator;
